@@ -27,7 +27,6 @@
 				<section>
                     <img width=150 height=75 src="images/qtlogo.svg">
                     <h2>Qt for WebAssembly</h2>
-                    <img width=300 height=300 src="images/qtws18.png">
                     <p>morten.sorvig@qt.io <p/>
                 </section>
                 <section>
@@ -38,102 +37,36 @@
                 </section>
                 <section>
                     <h2>Agenda</h2>
-                    <p>Introduction to WebAssembly and Emscripten</p>
-                    <p>Building for WebAssembly</p>
-                    <p>Qt Applications as a &lt;canvas&gt;</p>
+                    <p>Building Applicaitons for WebAssembly</p>
                     <p>Local File Access</p>
                     <p>Networking</p>
-                    <p>JavaScript and C++ Interop</p>
                 </section>
                 <section>
-                    <h2><i>Why</i> Qt for WebAssembly</h2>
-                    <p>Build once, deploy everywhere</p>
+                    <h2>WebAssembly platform features</h2>
+                    <p>Build once, deploy everywhere*</p>
                     <p>No installation required</p>
                     <p>Security through sandboxing</p>
                 </section>
                 <section>
-                    <h2>Platform Stack</h2>
-                    <img src="images/qtstack.svg" style="display:block;margin:0 auto;">
+                    <h2>Qt Support</h2>
+                    <p>Qt 5.12: Tech preview</p>
+                    <p>Qt 5.13: Supported platform</p>
                 </section>
                 <section>
-                    <h2>WebAssembly</h2>
-                    <iframe width="1000" height="600" src="https://webassembly.org"></iframe>
+                    <h2>Qt Support: The fine print</h2>
+                    <p>Suppored Modules: QtBase, QtDeclarative, QQuickControls2, QtCharts, QtWebSockets, QtMQTT</p>
+                    <p>Not Supported: QtMultimedia, QtWebEngine</p>
+                    <p>No system font support (bring your own fonts)</p>
+                    <p>No accessibility/screen reader support</p>
                 </section>
                 <section>
-                    <h2>Emscripten</h2>
-                    <iframe width="1000" height="600" src="http://kripken.github.io/emscripten-site/"></iframe>
-                </section>
-                <section>
-                    <h2>Qt</h2>
-                    <p>New platform for 5.12: Q_OS_WASM</p>
-                    <p>Tech Preview</p>
-                    <p>Host system support: GNU/Linux, macOS, Windows Subsystem for Linux</p>
-                </section>
-                <section>
-                        <h2>Build Qt from source</p>
-                        <img width=650 src="images/qtmaintenancetoolsources.png">
-                </section>
-                <section>
-                        <h2>Build Qt from source</h2>
-                        <pre><code class="hljs" data-trim contenteditable>
-$ ~/Qt/5.12.0/Src/configure
-    -xplatform wasm-emscripten -nomake examples
-
-$ make module-qtbase module-qtquickcontrols2</code></pre>
-                        <p>Implicit configure flags: -static -no-feature-thread</p>
-                        <p>Suppored Modules: QtBase, QtDeclarative, QQuickControls2, QtCharts, QtWebSockets, QtMQTT ++</p>
-                        <p>Not Supported: QtMultimedia, QtWebEngine</p>
-                </section>
-                <section>
-                    <h2>The fine print</h2>
-                    <p style="font-size:28px;">No system cliboard support</p>
-                    <p style="font-size:28px;">No virtual keyboard support on mobile</p>
-                    <p style="font-size:28px;">No nested event loop support (QEventLoop::exec())</p>
-                    <p style="font-size:28px;">No system font support (bring your own fonts)</p>
-                    <p style="font-size:28px;">No accessibility/screen reader support</p>
-                    <p><a href=https://wiki.qt.io/Qt_for_WebAssembly target="blank">wiki.qt.io/Qt_for_WebAssembly</a></p>
-                </section>
-                <section>
-                    <h2>Build Application</h2>
-                        <pre><code class="hljs" data-trim contenteditable>
-$ /path/to/qt-wasm/qtbase/bin/qmake
-$ make</code></pre>
-                    <p>Will produce .wasm, .js and .html files</p>
-                    <p>These can be served from any web server</p>
-                </section>
-                <section>
-                    <h2>Build Output Files</h2>
-                    <table>
-				    <thead>
-						<tr>
-							<th>Name</th>
-							<th>Source</th>
-                            <th>Purpose</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr style>
-							<td>app.html</td>
-							<td>Qt</td>
-							<td>HTML container</td>
-						</tr>
-						<tr>
-							<td>qtloader.js</td>
-							<td>Qt</td>
-                            <td>JS API for loading Qt apps</td>
-						</tr>
-						<tr>
-							<td>app.js</td>
-                            <td>emscripten</td>
-							<td>app runtime and JS API</td>
-						</tr>
-						<tr>
-							<td>app.wasm</td>
-                            <td>emscripten</td>
-							<td>app binary</td>
-						</tr>
-					</tbody>
-				    </table>
+                    <h2>Building Qt Applications</h2>
+                    <p>1) Install Emscripten</p>
+                    <p>2) Build/Install Qt for WebAssembly</p>
+                    <p>3) Build Application (qmake + make)</p>
+                    <p>Will produce .wasm, .js and .html files, which
+                        can be served from any web server</p>
+                    <p><a href=https://wiki.qt.io/Qt_for_WebAssembly target="blank">Getting started: wiki.qt.io/Qt_for_WebAssembly</a></p>
                 </section>
                 <section>
                     <h2>Wasm Binary Size</h2>
@@ -166,53 +99,6 @@ $ make</code></pre>
                     </table>
 				</section>
                 <section>
-                    <h2>Memory Usage</h2>
-                    <p>For the "FirefoxCP Web Content" process</p>
-                    <p>Measured using Activity Monitor, on macOS</p>
-    				<table>
-    				    <thead>
-    						<tr>
-    							<th>Page/Application</th>
-    							<th>Memory</th>
-    						</tr>
-    					</thead>
-    					<tbody>
-    						<tr>
-    							<td>slate.wasm (Qt App)</td>
-    							<td>460 MB</td>
-    						</tr>
-    						<tr>
-    							<td>tanks.wasm (webassembly.org)</td>
-    							<td>499 MB</td>
-    						</tr>
-    						<tr>
-    							<td>nytimes.com</td>
-    							<td>367 MB</td>
-    						</tr>
-    						<tr>
-    							<td>news.ycombinator.com</td>
-    							<td>60 MB</td>
-    						</tr>
-    						<tr>
-    							<td>slate.app (macOS native)</td>
-    							<td>86 MB</td>
-    						</tr>
-    					</tbody>
-                    </table>
-				</section>
-                <section>
-                    <h2>Application as &lt;canvas&gt;</h2>
-                    <p> The application is embedded in the html page as a canvas element</p>
-                    <pre><code class="hljs" data-trim contenteditable>
-&lt;div&gt;
-    &lt;canvas&gt;
-        &lt;!--- App Appears Here --&gt;
-    &lt;/canvas&gt;
-&lt;/div&gt;</code></pre>
-                    <p>The html file controls cavas position and size<p/>
-                    <p>The application sees a QScreen with geometry matching that of the canvas<p/>
-                </section>
-                <section>
                     <h2>Demo: Slate</h2>
                     <img src="images/slate-icon-web.svg" style="display:block;margin:0 auto;">
                     <a href="https://github.com/mitchcurtis/slate" target="_blank">Slate - Pixel Art Editor</a>
@@ -226,7 +112,6 @@ $ make</code></pre>
                 <section>
                     <h2>Local File Access</h2>
                         <p>Sandbox prevents direct file system access</p>
-                        <p>Emscripten creates an in-memory file system, accessible by QFile</p>
                         <p>HTML has API for opening a file dialog, and starting a file download<p>
                         <p>Not Compatible with QFileDialog - New API is needed<p>
                         <p><p>
@@ -289,38 +174,16 @@ QWasmFile::saveFile(content, fileNameHint);
                     <h2>MQTT over WebSocket</h2>
                     <iframe width="700" height="600" src="qt/mqtt_simpleclient/mqtt_simpleclient.html"></iframe>    
                 </section>
-
-                <section>
-                    <h2>JavaScript and C++ Interop</h2>
-                    <p>Use case: The applicaiton is a web page component</p>
-                    <p>We want to transfer of control and state</p>
-                    <p>Emscripten provides API</p>
-                </section>
-                <section>
-                <iframe width="1000" height="900" src = "qt/colordebugger/examples/web/index-minimal.html"></iframe>    
-                </section>
-                <section>
-                    <h2>Calling C++ API from JavaScript</h2>
-                    <p>Export C++ API to JavaScript</p>
-                	<pre><code class="hljs" data-trim contenteditable>
-                #include &lt;emscripten/bind.h&gt;
                 
-                void setColor(int r, int g, int b);
-                
-                EMSCRIPTEN_BINDINGS(colorDebugger) {
-                    emscripten::function("setColor", &setColor);
-                }
-                </code></pre>
-                    <p>Make call from JavaScript </p>
-                    <pre><code class="hljs" data-trim contenteditable>
-                        Module.setColor(rgb[0], rgb[1], rgb[2]);
-                    </code></pre>                    
+                <section>
+                    <h2>Bonus Demo Slide</h2>
+                    <p><a href=http://localhost:8001/gui_multicanvas.html target="blank">http://localhost:8001/gui_multicanvas.html</a></p>
+                    <p><a href=https://dragly.org/projects/neuronify/ target="blank">https://dragly.org/projects/neuronify/</a></p>
                 </section>
-
                 <section>
                 <img width=150 height=75 src="images/qtlogo.svg">
                 <h1>Thanks!</h1>
-                github.com/msorvig/QtWS18
+                <p><a href=https://wiki.qt.io/Qt_for_WebAssembly target="blank">wiki.qt.io/Qt_for_WebAssembly</a></p>
                 </section>
 
 			</div>
